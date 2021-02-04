@@ -1,0 +1,40 @@
+Fecha diagnóstico;Territorio;Medida;Valor;
+
+TABLA FECHA_DIAG_PROV
+==================
+
+
+
+
+fechadiag_territorio | Confirmados PDIA | Total confirmados | Hospitalizados | UCI | 
+28/01/2021_1 
+28/01/2021_2	
+28/01/2021_3
+28/01/2021_4
+28/01/2021_5
+28/01/2021_6
+28/01/2021_7
+28/01/2021_8
+
+
+TABLA PROVINCIAS
+================
+Id 	Nombre 		Población 	Tasa
+1   	Almería
+2	Cádiz
+3	Córdoba
+4	Granada
+5	Huelva
+6	Jaén
+7	Málaga
+8	Sevilla
+
+TABLA_DISTRITO_SANITARIOS
+
+
+
+TABLA MUNICIPIOS
+================
+Municipio | Provincia | Población | Confirmados PDIA | Confirmados PDIA 14 día | Fallecidos | Confirmados PDIA 7 días | Tasa PDIA 14 días | Curados
+Abla	    1	 	1183		40			3
+Abrucena    1 	
