@@ -11,6 +11,7 @@ urlpatterns = [
     path('township-list', views.townshipList, name="province-list"),
     path('region-historic-detail/', views.regionHistoricDetail, name="region-historic-detail"),     
     path('township-historic-detail/<str:name>/', views.townshipHistoricDetail, name="township-historic-detail"),
-    path('province-historic-detail/<str:name>/', views.provinceHistoricDetail, name="township-historic-detail")  ,
-    path('region-acumulated-detail/', views.regionAccumulatedDetail, name="region-acumulated-detail")    
+    path('province-historic-detail/<str:name>/', views.provinceHistoricDetail, name="township-historic-detail"),
+    path('region-acumulated-all/', views.regionAccumulatedAll, name="region-acumulated-detail"),
+    path('province-acumulated-all/', views.provinceAccumulatedAll, name="province-acumulated-all")   
 ]

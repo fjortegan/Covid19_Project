@@ -39,4 +39,9 @@ class ProvinceHistoricDetailSerializer(serializers.ModelSerializer):
 class RegionAccumulatedSerializer(serializers.ModelSerializer):
     class Meta:
         model = AcumulatedRegion
+        fields = ('id', 'date', 'ccaa', 'confirmedPDIA', 'aument', 'pcr14days','pcr7days','totalConfirmed','Hospitalized','ICU','deceased','recovered')
+
+class ProvinceAccumulatedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AcumulatedProvinces
         fields = ('id', 'date', 'ccaa', 'confirmedPDIA', 'aument', 'pcr14days','pcr7days','totalConfirmed','Hospitalized','ICU','deceased','recovered')          

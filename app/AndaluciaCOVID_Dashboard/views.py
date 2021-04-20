@@ -17,7 +17,9 @@ def apiOverview(request):
         'Histórico de una provincia': '/province-historic-detail/<str:name>/',
         'Histórico de un municipio': '/township-historic-detail/<str:name>/',
         'Histórico de Andalucía': '/region-historic-detail/',
-        'Delete': '/task-delete/<str:pk>/',
+        'Acumulados en la región':'/region-acumulated-all/',
+        'Acumulados en las provincias':'/province-acumulated-all/',
+        'Acumulados en los municipios':'/township-acumulated-all/'
     }
     return Response(api_urls)
 
@@ -48,19 +50,25 @@ def townshipHistoricDetail(request, name):
 
 @api_view(['GET'])
 def provinceHistoricDetail(request, name):
-    province = Province.objects.filter(name=name)[0]
+    province = Province.objects.filter(name=name)[0].order_by('-date',)
     provinceHistorics = HistoricProvince.objects.filter(province = province)
     serializer = ProvinceHistoricDetailSerializer(provinceHistorics,many=True)
     return Response(serializer.data)    
 
 @api_view(['GET'])
 def regionHistoricDetail(request):
-    regionHistorics = HistoricGeneral.objects.all()
+    regionHistorics = HistoricGeneral.objects.all().order_by('-date',)
     serializer = RegionHistoricDetailSerializer(regionHistorics,many=True)
     return Response(serializer.data)    
 
 @api_view(['GET'])
-def regionAccumulatedDetail(request):
-    regionAcc= AcumulatedRegion.objects.all()
+def regionAccumulatedAll(request):
+    regionAcc= AcumulatedRegion.objects.all().order_by('-date',)
     serializer = RegionAccumulatedSerializer(regionAcc,many=True)
+    return Response(serializer.data)        
+
+@api_view(['GET'])
+def provinceAccumulatedAll(request):
+    provinceAcc = AcumulatedProvinces.objects.all().order_by('-date',)
+    serializer = ProvincesAccumulatedSerializer(provinceAcc,many=True)
     return Response(serializer.data)        
