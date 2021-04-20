@@ -145,3 +145,20 @@ class AcumulatedRegion(models.Model):
         ]
     class Meta:
         verbose_name = 'Datos acumulados en Andalucía'
+        
+class AcumulatedTownsip(models.Model):
+    id = models.AutoField(primary_key=True)
+    date = models.DateField(max_length=100)
+    tship = models.ForeignKey(Township, on_delete=models.CASCADE, verbose_name = "Municipio")
+    confirmedPDIA = models.IntegerField(null=False,verbose_name="Confirmados PDIA",default=0)
+    totalConfirmed = models.IntegerField(null=False,verbose_name="Total Confirmados",default=0)
+    tasa14days = models.IntegerField(null=False,verbose_name="Tasa a 14 días",default=0)
+    tasa7days = models.IntegerField(null=False,verbose_name="Tasa a 7 dias",default=0)
+    deceased = models.IntegerField(null=False,verbose_name="Fallecidos",default=0)
+    recovered = models.IntegerField(null=False,verbose_name="Curados",default=0)
+    
+    constraints = [
+            models.UniqueConstraint(fields=['date', 'tship'], name='CONSTR_NO_REPEAT_ACUMTS')
+        ]
+    class Meta:
+        verbose_name = 'Datos acumulados en los municipios de Andalucía'

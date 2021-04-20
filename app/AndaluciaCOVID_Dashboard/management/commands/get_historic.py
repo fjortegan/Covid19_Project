@@ -117,6 +117,7 @@ class Command(BaseCommand):
             for tship in townshipList:
                 for row in (df[df["township"] == tship.name].values):
                     if (row[0]>covid_data_df):
+                        print(row[0])
                         tshipsel = Township.objects.filter(name=row[3])
                         ifExists = HistoricTownship.objects.filter(date=row[0],township=tshipsel[0])
                         if (ifExists.count()==0):

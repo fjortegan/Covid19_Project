@@ -59,3 +59,10 @@ class AccumulatedProvincesAdmin(admin.ModelAdmin):
 @admin.register(AcumulatedRegion)
 class AccumulatedRegionsAdmin(admin.ModelAdmin):
     list_display = ("date", "ccaa","confirmedPDIA","totalConfirmed","Hospitalized","ICU","deceased","aument")
+
+@admin.register(AcumulatedTownsip)
+class AccumulatedRegionsAdmin(admin.ModelAdmin):
+    list_display = ("date", "get_township","confirmedPDIA","totalConfirmed","tasa14days","tasa7days","deceased")    
+    list_filter = ("tship__name", )
+    def get_township(self, obj):
+        return obj.tship.name
