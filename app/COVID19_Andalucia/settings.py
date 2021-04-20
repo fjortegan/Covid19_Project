@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 DJANGO_SETTINGS_MODULE='COVID19_Andalucia.settings'
@@ -20,13 +21,13 @@ DJANGO_SETTINGS_MODULE='COVID19_Andalucia.settings'
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = 'xuwz^q-@9&y375#lt=t7hy&$6!hz-djfbn6o16wq+al$_kmq7h'
 
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = True
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
 DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
 
@@ -72,19 +73,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'COVID19_Andalucia.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-'default': {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'andalucia_covid_2019',
-    'USER': 'django',
-    'PASSWORD': 'django',
-    'HOST': 'db',
-    "PORT": '5432',
- }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'andalucia_covid',
+        'USER': 'django',
+        'PASSWORD': 'django',
+        'HOST': 'localhost',
+        'PORT': 5432,
+    }
 }
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -110,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-es'
 
-TIME_ZONE = 'GMT'
+TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True
 
@@ -121,5 +121,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

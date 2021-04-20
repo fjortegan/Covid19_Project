@@ -1,6 +1,9 @@
 from django.contrib import admin
-from .models import Province,District,Township,HistoricProvince,HistoricDistrit,HistoricTownship
+from .models import *
 
+@admin.register(Region)
+class Region(admin.ModelAdmin):
+    list_display = ("id","name")
 @admin.register(Province)
 class ProvinceAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
@@ -41,3 +44,18 @@ class HistoricProvinceAdmin(admin.ModelAdmin):
     list_filter = ("province__name", )
     def get_province(self, obj):
         return obj.province.name
+
+@admin.register(HistoricGeneral)
+class HistoricGeneralAdmin(admin.ModelAdmin):
+    list_display = ("date", "cAutonoma","confirmedPDIA","totalConfirmed","Hospitalized","ICU","deceased")
+
+@admin.register(AcumulatedProvinces)
+class AccumulatedProvincesAdmin(admin.ModelAdmin):
+    list_display = ("date", "get_province","confirmedPDIA","totalConfirmed","Hospitalized","ICU","deceased","aument")
+    list_filter = ("province__name", )
+    def get_province(self, obj):
+        return obj.province.name
+
+@admin.register(AcumulatedRegion)
+class AccumulatedRegionsAdmin(admin.ModelAdmin):
+    list_display = ("date", "ccaa","confirmedPDIA","totalConfirmed","Hospitalized","ICU","deceased","aument")

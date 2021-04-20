@@ -35,6 +35,19 @@ class Command(BaseCommand):
                         deceased=int(row[6])
                     )
                         newHistoric.save()
+            for row in (df[df["prov"] == 'Andalucía'].values):
+                ifExists = HistoricGeneral.objects.filter(date=row[0],cAutonoma=Region.objects.all()[0])
+                if (ifExists.count()==0):
+                    newHistoricGeneral = HistoricGeneral(date=row[0],
+                    cAutonoma=row[1],
+                    confirmedPDIA=int(row[2]),
+                    totalConfirmed=int(row[3]),
+                    Hospitalized=int(row[4]),
+                    ICU=int(row[5]),
+                    deceased=int(row[6])
+                    )
+                    newHistoricGeneral.save()
+
         except IndexError as e:
             print(e)
 
@@ -62,9 +75,10 @@ class Command(BaseCommand):
             covid_data_df = str(covid_data.date())
             districtList = District.objects.all()
             townshipList = Township.objects.all()
+
             for distr in districtList:
                 for row in (df[df["distr"] == distr.name].values):
-                    if (row[0]>covid_data_df):
+                    if (row[0]>=covid_data_df):
                         district = District.objects.filter(name=row[2])
                         ifExists = HistoricDistrit.objects.filter(date=row[0],distr=district[0])
                         if (ifExists.count()==0):
@@ -120,7 +134,7 @@ class Command(BaseCommand):
   
     def handle(self, *args, **options):
         print('Updating...')
-       # self.updateHistoricProvince()
+        self.updateHistoricProvince()
         self.updateHistoricDistrict()
         self.setHistoricTownships()
         print('...MIGRATION SUCCESFUL!')

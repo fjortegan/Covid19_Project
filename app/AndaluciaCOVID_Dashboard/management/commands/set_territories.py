@@ -11,9 +11,15 @@ from AndaluciaCOVID_Dashboard.models import *
 class Command(BaseCommand):
     help = 'Use this command to populate de DB automatically'
 
+    Region.objects.all().delete()
     Province.objects.all().delete()
     District.objects.all().delete()
     Township.objects.all().delete()
+
+    def setRegions(self):
+        region = Region(id=0,name="Andalucía")
+        region.save()     
+
     def getProvinces(self):
         """ 
         Migrar a la base de datos las provincias,municipios y distritos de Andalucía
@@ -25,7 +31,8 @@ class Command(BaseCommand):
             df.drop(df.index[[0, 2]])
             for prov in df.province:
                 if (Province.objects.filter(name=prov).exists() == False):
-                    province = Province(name=prov)
+                    region = Region.objects.all()[0]
+                    province = Province(name=prov,ccaa=Region(id=0,name="Andalucía"))
                     province.save()
         except IndexError as e:
             print(e)
@@ -62,6 +69,8 @@ class Command(BaseCommand):
             print(e)
 
     def handle(self, *args, **options):
+        print('Adding region...')
+        self.setRegions()
         print('Adding provinces...')
         self.getProvinces()
         print('Adding distrits...')
