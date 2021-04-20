@@ -19,6 +19,6 @@ from django.urls import re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/',include('AndaluciaCOVID_Dashboard.urls')),
-    path('', include('AndaluciaCOVID_Dashboard.urls'))
+    path('api/', include('AndaluciaCOVID_Dashboard.urlsapi')),
+    path('app/', include('AndaluciaCOVID_Dashboard.urls'))
 ]
