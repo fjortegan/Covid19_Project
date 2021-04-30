@@ -1,0 +1,269 @@
+@import "bourbon/bourbon";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Source+Sans+Pro&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  color: white;
+  box-sizing: border-box;
+  font-family: monospace;
+  font-size: 15px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr 50px;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  background-color: whitesmoke;
+}
+
+.aside {
+  grid-area: aside;
+  background-color: #e5eadd;
+  font-family: "Poppins", sans-serif;
+}
+
+.main {
+  grid-area: main;
+  background-color: white;
+}
+.footer {
+  grid-area: footer;
+  background-color: whitesmoke;
+}
+
+/* flexing header and footer*/
+.header,
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #3a4a40;
+  padding: 0 15px;
+}
+
+/* flexing aside */
+.aside {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 240px;
+  position: fixed;
+  overflow-y: auto;
+  z-index: 2;
+  transform: translateX(-245px);
+}
+
+.aside.active {
+  transform: translateX(0);
+}
+
+.aside_list {
+  padding: 0;
+  margin-top: 85px;
+  list-style-type: none;
+}
+
+.aside_list-item {
+  padding: 20px 20px 20px 40px;
+  color: rgb(27, 18, 18);
+}
+
+.aside_list-item:hover {
+  background-color: #677b49;
+  cursor: pointer;
+}
+
+.main_overview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: "Source Sans Pro", sans-serif;
+}
+.overview_card {
+  flex-basis: 250px;
+  flex-grow: 1;
+  margin: 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  /* background-color: seagreen; */
+  height: 100px;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  border-radius: 4px;
+  color: #003400;
+}
+
+.fa-angle-double-down {
+  border-radius: 50%;
+  height: auto;
+  background-color: #5cdb94;
+  padding: 8px 10px;
+  transition: 0.4s;
+}
+
+.header_menu_img {
+  border-radius: 20%;
+  width: 100px;
+  height: 100px;
+}
+
+.header_name {
+  margin-left: 10px;
+  margin-top: 15%;
+  color: #000000;
+}
+
+.overview_card{
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 0.65rem;
+  z-index: 1;
+  width: 50%;
+  background: #fff;
+  -webkit-transition: transform 0.2s ease-in-out;
+  -o-transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header_menu {
+  display: flex;
+}
+
+
+.fa-angle-double-up {
+  border-radius: 50%;
+  height: auto;
+  background-color: #ff6d5c;
+  padding: 8px 10px;
+  transition: 0.4s;
+}
+
+.overview_card-info {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Layout for main-cards section // below main_overview */
+.main_cards {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 500px 400px 400px;
+  grid-template-areas:
+    "card1"
+    "card2"
+    "card3";
+  grid-gap: 10px;
+}
+.card {
+  padding: 20px;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  border-radius: 4px;
+  color: rgb(0, 0, 0);
+}
+
+.card:first-child {
+  grid-area: card1;
+  font-family: "Poppins", sans-serif;
+}
+.card:nth-child(2) {
+  grid-area: card2;
+  font-family: "Poppins", sans-serif;
+}
+.card:nth-child(3) {
+  grid-area: card3;
+  font-family: "Poppins", sans-serif;
+}
+
+/* responsive layout */
+@media only screen and (min-width: 750px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 50px 1fr 50px;
+    grid-template-areas:
+      "aside header"
+      "aside main"
+      "aside footer";
+    height: 100vh;
+  }
+
+  .aside {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transform: translateX(0);
+  }
+
+  .main_cards {
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 200px 300px;
+    grid-template-areas:
+      "card1 card2"
+      "card1 card3";
+    grid-gap: 10px;
+  }
+}
+
+.menu-icon {
+  position: fixed;
+  display: flex;
+  top: 2px;
+  left: 8px;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  cursor: pointer;
+  padding: 12px;
+  color: black;
+}
+
+#responsive-canvas {
+  width: 100%;
+}
+
+.header_search {
+  margin-left: 24px;
+}
+
+.aside_close-icon {
+  position: absolute;
+  visibility: visible;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.canvas {
+  width: 100%;
+  height: auto;
+}
+
+.aside_close-icon {
+  color: #000000;
+}
+
+@media only screen and (min-width: 750px) {
+  .aside_close-icon {
+    display: none;
+    color: #000000;
+  }
+}

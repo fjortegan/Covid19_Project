@@ -56,7 +56,7 @@ class Command(BaseCommand):
             listRegister = []
             regionObject = Region.objects.filter(name="Andalucía")[0]
             dateDF = date.strftime('%d/%m/%Y')
-
+            df.replace(np.NaN, "0", inplace=True)
             for listaDatos in (df[df["Territorio"] == "Andalucía"].values): 
                 if (listaDatos[0]==dateDF):
                     listData = listaDatos.tolist()
@@ -79,36 +79,7 @@ class Command(BaseCommand):
                 listRegister.clear()             
         except IndexError as e:
             print(e)
-
-    def getAcumulatedTodayTship(self, munName):
-        try:
-            directory = 'https://raw.githubusercontent.com/Pakillo/COVID19-Andalucia/master/datos/municipios.dia/Municipios_todos_datoshoy.csv'
-            df = pd.read_csv(directory, delimiter=";")
-            df.replace(np.NaN, 0, inplace=True)
-            df = df.iloc[1:]
-            tship = Township.objects.filter(name=munName)[0]
-            date = datetime.now().date()
-            listRegister = []
-
-            for listaDatos in (df[df["Lugar de residencia"] == tship.name].values):
-                listData = listaDatos.tolist()
-                listRegister.append(listData[2])
-            print(listRegister)
-            registerExists = AcumulatedTownsip.objects.filter(tship=tship,date=date)
-            if (registerExists.count()==0):
-                newRegisterAccumulated = AcumulatedTownsip(
-                    tship = tship,
-                    date = datetime.now().date(),
-                    confirmedPDIA = int(listRegister[1]),
-                    tasa14days = int(listRegister[4].split(",")[0]),
-                    tasa7days = int(listRegister[6].split(",")[0]),
-                    totalConfirmed = int(listRegister[7]),
-                    deceased = int(listRegister[7]),
-                    recovered = int(listRegister[9]))
-                newRegisterAccumulated.save()                    
-        except IndexError as e:
-            print(e)         
-    
+     
     def daterange(self,date1, date2):
         for n in range(int ((date2 - date1).days)+1):
             yield date1 + timedelta(n)
@@ -117,15 +88,15 @@ class Command(BaseCommand):
         print('Updating...')
         argument = options["territorio"] if options["territorio"] else "mun"
         townships = Township.objects.all()
+        provinces = Province.objects.all()
+
         start = datetime.now() - timedelta(days=14)
         start_dt = start.date()
         end_dt = datetime.now().date()
         for dt in self.daterange(start_dt, end_dt):
-            if (argument=="Andalucía"):
+            if (argument=="all"):
                 self.getAcumulatedTodayReg(dt)
             elif (argument!="mun"):
-                self.getAcumulatedTodayProv(argument,dt)
-        
-        for township in townships:
-            self.getAcumulatedTodayTship(township.name)
+                for province in provinces:
+                    self.getAcumulatedTodayProv(province.name,dt)
         print('...MIGRATION SUCCESFUL!')

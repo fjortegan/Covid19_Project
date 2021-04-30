@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    {% load static %}
+    <title>{% block title %}Andalucía COVID Dashboard{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+    />
+    <!-- Optional theme -->
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+    {% load compress %} {% compress css %}
+    <link
+      type="text/x-scss"
+      href="{% static 'dashboard/style.scss' %}"
+      rel="stylesheet"
+      media="screen"
+    />
+    {% endcompress %}
+  </head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Building dashboard with gird and flex</title>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="menu-icon">
+        <strong> &#9776;</strong>
+      </div>
+      <header class="header">
+        <div class="header_search">Buscar...</div>
+      </header>
+      <aside class="aside">
+        <div class="aside_close-icon">
+          <strong>&times;</strong>
+        </div>
+        <div class="header_menu">
+        <img class="header_menu_img" src="https://img.icons8.com/bubbles/2x/coronavirus.png" alt="logo" />
+          <h4 class="header_name">DASHBOARD</h1>
+        </div>
+        <ul class="aside_list">
+          <li class="aside_list-item"><i class="fas fa-chart-line" style="margin-right: 10px;"></i></i>General</li>
+          <li class="aside_list-item"><i class="fas fa-chart-bar" style="margin-right: 10px;"></i>Provincias</li>
+          <li class="aside_list-item"><i class="fas fa-chart-area" style="margin-right: 10px;"></i>Municipios</li>
+          <li class="aside_list-item"><i class="fas fa-question-circle" style="margin-right: 10px;"></i>Q&A</li>
+        </ul>
+      </aside>
+      <main class="main">
+        <div class="main_overview">
+        {% block content %}{% endblock %}
+        </div>   
+    </main>
+    <script type="text/javascript">
+      const menuIcon = document.querySelector('.menu-icon');
+      const aside = document.querySelector('.aside');
+      const asideClose = document.querySelector('.aside_close-icon');
+
+      function toggle(el, className) {
+        if (el.classList.contains(className)) {
+          el.classList.remove(className);
+        } else {
+          el.classList.add(className);
+        }
+      }
+
+      menuIcon.addEventListener('click', function() {
+        toggle(aside, 'active');
+      });
+
+      asideClose.addEventListener('click', function() {
+        toggle(aside, 'active');
+      });
+    </script>
+        <footer class="footer">
+        <div class="footer_copyright">&copy;2020</div>
+        <div class="footer_byline">Made with &hearts;</div>
+      </footer>    
+  </body>
+</html>
