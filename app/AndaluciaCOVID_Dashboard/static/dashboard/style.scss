@@ -98,7 +98,7 @@ body {
   padding: 20px;
   /* background-color: seagreen; */
   height: 100px;
-  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   color: #003400;
 }
@@ -118,12 +118,12 @@ body {
 }
 
 .header_name {
-  margin-left: 10px;
+  margin-left: 5px;
   margin-top: 15%;
-  color: #000000;
+  color: #08C697;
 }
 
-.overview_card{
+.overview_card {
   background-repeat: no-repeat;
   background-position: right;
   background-size: 80px;
@@ -145,7 +145,6 @@ a::before {
 .header_menu {
   display: flex;
 }
-
 
 .fa-angle-double-up {
   border-radius: 50%;
@@ -173,7 +172,7 @@ a::before {
 }
 .card {
   padding: 20px;
-  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   color: rgb(0, 0, 0);
 }

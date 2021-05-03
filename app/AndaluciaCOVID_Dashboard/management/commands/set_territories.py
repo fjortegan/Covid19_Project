@@ -16,33 +16,42 @@ class Command(BaseCommand):
         directory = 'https://raw.githubusercontent.com/Pakillo/COVID19-Andalucia/master/datos/municipios.dia/Municipios_todos_datoshoy.csv'
         df = pd.read_csv(directory, delimiter=";")
         df.replace(np.NaN, 0, inplace=True)
-        df = df.iloc[1:]
         listRegister = []
         try:
             for listaDatos in (df[df["Lugar de residencia"] == "Andalucía"].values):
                 listData = listaDatos.tolist()
                 listRegister.append(listData[2])
             print(listRegister)
-            if (listRegister[3]==0):
+            if (listRegister[4]==0):
                 valtasa14 = 0
             else:
-                valtasa14 = int(listRegister[3].split(",")[0])
-            if (listRegister[5]==0):
+                valtasa14 = int(listRegister[4].split(",")[0])
+            if (listRegister[6]==0):
                 valtasa7 = 0
             else:
-                valtasa7 = int(listRegister[5].split(",")[0])  
-                
-            region = Region(
-                id=0,
-                name="Andalucía",
-                poblation = int(listRegister[0]),   
-                confirmedPDIA = int(listRegister[2]),
-                tasa14days =valtasa14,
-                tasa7days = valtasa7,
-                totalConfirmed = int(listRegister[6]),
-                deceased = int(listRegister[8]),
-                recovered = int(listRegister[9]))
-            region.save()  
+                valtasa7 = int(listRegister[6].split(",")[0])  
+
+            if (Region.objects.all().filter(id=0).count()==0):            
+                region = Region(
+                    id=0,
+                    name="Andalucía",
+                    poblation = int(listRegister[0]), 
+                    confirmedPDIA = int(listRegister[1]),
+                    tasa14days = valtasa14,
+                    tasa7days = valtasa7,
+                    totalConfirmed = int(listRegister[7]),
+                    deceased = int(listRegister[10]),
+                    recovered = int(listRegister[9]))
+                region.save() 
+            else:
+               regionUpdating = Region.objects.all().filter(id=0)[0]  
+               regionUpdating.confirmedPDIA = int(listRegister[1])
+               regionUpdating.tasa14days = valtasa14
+               regionUpdating.tasa7days = valtasa7
+               regionUpdating.totalConfirmed = int(listRegister[7])
+               regionUpdating.deceased = int(listRegister[10])
+               regionUpdating.recovered = int(listRegister[9])
+               regionUpdating.save() 
         except IndexError as e:
             print(e)
 
