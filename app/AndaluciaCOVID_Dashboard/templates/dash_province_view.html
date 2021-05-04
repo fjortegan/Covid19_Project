@@ -1,40 +1,116 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
+<div class="main_cards">
+  <div class="card">
+    <div id="container">
+    </div>
+  </div>
+  <div class="card">
+    Aumento de ingresados
+    <canvas
+      class="responsive-canvas"
+      id="pie-chart3"
+      width="350"
+      height="150"
+    ></canvas>
+  </div>
+  <div class="card">
+    Aumento de contagios diarios
+    <canvas
+      class="responsive-canvas"
+      id="pie-chart2"
+      width="350"
+      height="250"
+    ></canvas>
+  </div>
 
-        <div class="main_cards">
-          <div class="card">Aumento de los diagnosticados a 14 días
-              <canvas class="responsive-canvas" id="pie-chart" width="350" height="250"></canvas>
-          </div>
-          <div class="card">Aumento de ingresados
-            <canvas class="responsive-canvas" id="pie-chart3"  width="350" height="150"></canvas>
-          </div>
-          <div class="card">Evolución de fallecidos y curados
-           <canvas class="responsive-canvas" id="pie-chart2" width="350" height="250"></canvas>
-           </div>
-          
   <script>
-    var ctx = document.getElementById('pie-chart').getContext('2d'); 
-    var data_1 = {
-        datasets: [{
-        fill: true,
-        backgroundColor: "#62E199",
-        label: 'Contagios en un día',
-        data: {{ dataAument|safe }}
-        }],
-        labels: {{ labels|safe }}
-        };  
-    var chart1 = new Chart(ctx, {
-        type: 'line',
-        data: data_1,
-        options: {
-                scales: {
-      y: { 
-        min: 0
-      }
-    },
-                    responsive: true
+        var ctx = document.getElementById('pie-chart2').getContext('2d');
+        var data_1 = {
+            datasets: [{
+            fill: true,
+            backgroundColor: [
+                '#488f31', '#75a760', '#9fc08f', '#c8d8bf', '#f1f1f1','#f1c6c6','#ec9c9d'
+              ],
+            label: 'Contagios en un día',
+            data: {{ provincesIncidence|safe }}
+            }],
+            labels: {{ labels|safe }}
+            };
+        var chart1 = new Chart(ctx, {
+            type: 'pie',
+            data: data_1,
+            options: {
+                    scales: {
+          y: {
+            min: 0
+          }
+        },
+                        responsive: true
+                    }
+                });
+
+    const tableContainer = document.getElementById('container');
+
+    const chartData = {
+      type: 'line',
+      data: {
+        labels: ["Almería", "Cádiz", "Córdoba", "Granada", "Huelva","Jaén","Málaga","Sevilla"],
+        datasets: [
+            {
+              label: 'Tasa 14 días',
+              data: {{ UCI|safe }},
+            borderWidth: 1
+            },
+                {
+                    label: 'UCI',
+                    data:  {{ UCI|safe }},
+                    borderWidth: 1
+                },
+                {
+                    label: 'Fallecidos',
+                    data: {{ deceased|safe }},
+                    borderWidth: 1
+                },
+                  {
+                    label: 'Curados',
+                    data: {{ recovered|safe }},
+                    borderWidth: 1
                 }
-            });
+            ]
+      },
+      options: {
+        scales: {
+            yAxes: [{
+            ticks: {
+                        reverse: false
+            }
+          }]
+        }
+      }
+    };
+
+    const xAxis = chartData.data.labels;
+    const yAxis = chartData.data.datasets;
+
+    const tableHeader = `<tr>${
+    	xAxis.reduce((memo, entry) => {memo += `<th>${entry}</th>`; return memo;}, '<th></th>')
+    }</tr>`;
+
+    const tableBody = yAxis.reduce((memo, entry) => {
+    		const rows = entry.data.reduce((memo, entry) => {
+          	memo += `<td>${entry}</td>`
+          	return memo;
+          }, '');
+
+    		memo += `<tr><td>${entry.label}</td>${rows}</tr>`;
+
+        return memo;
+    }, '');
+
+    const table = `<table class="fl-table">${tableHeader}${tableBody}</table>`;
+
+    tableContainer.innerHTML = table;
   </script>
-{% endblock %}
+  {% endblock %}
+</div>

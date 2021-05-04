@@ -20,16 +20,17 @@ def dash_general_view(request):
     size = queryset2.count()
 
     for register in queryset2:
-        if (count==0):
+        if (count == 0):
             regComp = queryset2[0]
         count += 1
         if (count < size):
             regComp = queryset2[count]
-            etiquetas2.append(str(queryset2[count].date.day) + '/' + str(queryset2[count].date.month))           
+            etiquetas2.append(
+                str(queryset2[count].date.day) + '/' + str(queryset2[count].date.month))
         dataICU.append(regComp.ICU - register.ICU)
         dataHospitalizedCounter.append(
-            regComp.Hospitalized - register.Hospitalized - dataICU[count-1])  
-                 
+            regComp.Hospitalized - register.Hospitalized - dataICU[count-1])
+
         etiquetas1.append(str(register.date))
         dataAument.append(register.aument)
         deceasedList.append(regComp.deceased - register.deceased)
@@ -72,16 +73,34 @@ def search(request):
 
 
 def dash_province_view(request):
-    provinces = Province.objects.all()
+    provinces = Province.objects.order_by('name')
     etiquetas = []
+    provincesIncidence = []
+    ICU = []
+    deceased = []
+    recovered = []
 
-    provincesIncidence = {}
     for province in provinces:
-        provincesIncidence[province.name] = province.tasa14days
+        registerAcum = AcumulatedProvinces.objects.filter(province=province).order_by('-date')
+        if (registerAcum.count()>0):
+            etiquetas.append(province.name)
+            deceasedToAdd = registerAcum[0].deceased - registerAcum[1].deceased
+            recoveredToAdd = registerAcum[0].recovered - registerAcum[1].recovered
+            ICU.append(registerAcum[0].ICU  - registerAcum[1].ICU)
+            deceased.append(deceasedToAdd)
+            recovered.append(recoveredToAdd)
+            provincesIncidence.append(registerAcum[0].aument)
+
+    print(ICU)
+    print(deceased)
+    print(recovered)
 
     return render(request, 'dash_province_view.html', {
         'labels': etiquetas,
-        'provincesIncidence': provincesIncidence
+        'provincesIncidence': provincesIncidence,
+        'UCI':ICU,
+        'deceased': deceased,
+        'recovered': recovered,
     })
 
 # API VIEWS
