@@ -18,11 +18,11 @@
           </div>
           <div class="overview_card">
             <div class="overview_card-info">Curados</div>
-            <div class="overview_card-icon">{{deceased}}</div>
+            <div class="overview_card-icon">{{recovered}}</div>
           </div>
           <div class="overview_card">
             <div class="overview_card-info">Fallecidos</div>
-            <div class="overview_card-icon">{{recovered}}</div>
+            <div class="overview_card-icon">{{deceased}}</div>
           </div>
         </div>
 
@@ -30,10 +30,10 @@
           <div class="card">Aumento de los diagnosticados a 14 días
               <canvas class="responsive-canvas" id="pie-chart" width="350" height="250"></canvas>
           </div>
-          <div class="card">Aumento de ingresados en UCI
+          <div class="card">Aumento de ingresados
             <canvas class="responsive-canvas" id="pie-chart3"  width="350" height="150"></canvas>
           </div>
-          <div class="card">Evolución de hospitalizados a 14 días
+          <div class="card">Evolución de fallecidos y curados
            <canvas class="responsive-canvas" id="pie-chart2" width="350" height="250"></canvas>
            </div>
           
@@ -42,7 +42,8 @@
     var data_1 = {
         datasets: [{
         fill: true,
-        backgroundColor: "#62E199",
+        borderColor: "#62E199",
+        fill: false,
         label: 'Contagios en un día',
         data: {{ dataAument|safe }}
         }],
@@ -64,12 +65,20 @@
     var ctx_2 = document.getElementById('pie-chart2').getContext('2d'); 
     var data_2 = {
         datasets: [{
-        backgroundColor: "#F8E382",
-        label: 'Número de hospitalizados totales',
-        data: {{ dataHospitalized|safe }}
-        }],
-        labels: {{ labels|safe }}
-        };  
+        borderColor: "#FF6656",
+        label: 'Fallecidos totales',
+        fill: false,
+        data: {{ deceasedList |safe }}
+        },
+        {
+        borderColor: "#00A5FF",
+        fill: false,
+        label: 'Curados totales',
+        data: {{ recoveredList |safe }}
+        }
+        ],
+        labels: {{ labels2 |safe }}
+        }; 
     var chart2 = new Chart(ctx_2, {
          type: 'line',
         data: data_2,
@@ -81,10 +90,16 @@
     var data_3 = {
         datasets: [{
         backgroundColor: "#FF6D5C",
-        label: 'Aumento de ingresados en UCI',
+        label: 'UCI',
         data: {{ dataICU|safe }}
-        }],
-        labels: {{ labels|safe }}
+        },
+        {
+        backgroundColor: "#F8E382",
+        label: 'Convencional',
+        data: {{ dataHospitalizedCounter|safe }}
+        }
+        ],
+        labels: {{ labels2 |safe }}
         };  
     var chart3 = new Chart(ctx_3, {
          type: 'bar',

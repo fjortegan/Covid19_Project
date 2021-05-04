@@ -7,7 +7,86 @@ from rest_framework.response import Response
 # APP VIEWS
 
 
+def dash_general_view(request):
+    dataAument = []
+    dataHospitalizedCounter = []
+    dataICU = []
+    etiquetas1 = []
+    etiquetas2 = []
+    deceasedList = []
+    recoveredList = []
+    queryset2 = AcumulatedRegion.objects.order_by('date')[:16]
+    count = 0
+    size = queryset2.count()
+
+    for register in queryset2:
+        if (count==0):
+            regComp = queryset2[0]
+        count += 1
+        if (count < size):
+            regComp = queryset2[count]
+            etiquetas2.append(str(queryset2[count].date.day) + '/' + str(queryset2[count].date.month))           
+        dataICU.append(regComp.ICU - register.ICU)
+        dataHospitalizedCounter.append(
+            regComp.Hospitalized - register.Hospitalized - dataICU[count-1])  
+                 
+        etiquetas1.append(str(register.date))
+        dataAument.append(register.aument)
+        deceasedList.append(regComp.deceased - register.deceased)
+        recoveredList.append(regComp.recovered - register.recovered)
+
+    incid14days = Region.objects.filter(pk=0)[0].tasa14days
+    incid7days = Region.objects.filter(pk=0)[0].tasa7days
+    deceased = Region.objects.filter(pk=0)[0].deceased
+    recovered = Region.objects.filter(pk=0)[0].recovered
+
+    regi1 = AcumulatedRegion.objects.order_by('date')[0]
+    regi2 = AcumulatedRegion.objects.order_by('date')[1]
+
+    isMajorThanYesterday14 = regi1.pcr14days > regi2.pcr14days
+    isMajorThanYesterday7 = regi1.pcr7days > regi2.pcr7days
+
+    return render(request, 'dash_general_view.html', {
+        'labels': etiquetas1,
+        'labels2': etiquetas2,
+        'dataAument': dataAument,
+        'dataHospitalizedCounter': dataHospitalizedCounter,
+        'dataICU': dataICU,
+        'tasaInc14': incid14days,
+        'tasaInc7': incid7days,
+        'deceased': deceased,
+        'recovered': recovered,
+        'isMajorThanYesterday14': isMajorThanYesterday14,
+        'isMajorThanYesterday7': isMajorThanYesterday7,
+        'deceasedList': deceasedList,
+        'recoveredList': recoveredList
+    })
+
+
+def search(request):
+    results = []
+    query = request.GET.get('q')
+    results.add(Province.objects.filter(name.contains(q)))
+    results.add(Township.objects.filter(name.contains(q)))
+    return render(request, 'account/index.html', {'results': results})
+
+
+def dash_province_view(request):
+    provinces = Province.objects.all()
+    etiquetas = []
+
+    provincesIncidence = {}
+    for province in provinces:
+        provincesIncidence[province.name] = province.tasa14days
+
+    return render(request, 'dash_province_view.html', {
+        'labels': etiquetas,
+        'provincesIncidence': provincesIncidence
+    })
+
 # API VIEWS
+
+
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
@@ -80,48 +159,3 @@ def provinceAccumulatedAll(request):
     provinceAcc = AcumulatedProvinces.objects.all().order_by('-date',)
     serializer = ProvincesAccumulatedSerializer(provinceAcc, many=True)
     return Response(serializer.data)
-
-
-def dash_general_view(request):
-    dataAument = []
-    dataHospitalized = []
-    dataICU = []
-    etiquetas = []
-    queryset = AcumulatedRegion.objects.order_by('date')[:14]
-    count = 0
-    size = queryset.count()
-
-    for register in queryset:
-        count += 1
-        if (count < size):
-            regComp = queryset[count]
-
-        etiquetas.append(str(register.date.day) +
-                         '/' + str(register.date.month))
-        dataAument.append(register.aument)
-        dataHospitalized.append(register.Hospitalized)
-        dataICU.append(regComp.ICU - register.ICU)
-
-    incid14days = Region.objects.filter(pk=0)[0].tasa14days
-    incid7days = Region.objects.filter(pk=0)[0].tasa7days
-    deceased = Region.objects.filter(pk=0)[0].deceased
-    recovered = Region.objects.filter(pk=0)[0].recovered
-
-    regi1 = AcumulatedRegion.objects.order_by('date')[0]
-    regi2 = AcumulatedRegion.objects.order_by('date')[1]
-
-    isMajorThanYesterday14 = regi1.pcr14days > regi2.pcr14days
-    isMajorThanYesterday7 = regi1.pcr7days > regi2.pcr7days
-
-    return render(request, 'dash_general_view.html', {
-        'labels': etiquetas,
-        'dataAument': dataAument,
-        'dataHospitalized': dataHospitalized,
-        'dataICU': dataICU,
-        'tasaInc14': incid14days,
-        'tasaInc7': incid7days,
-        'deceased': deceased,
-        'recovered': recovered,
-        'isMajorThanYesterday14': isMajorThanYesterday14,
-        'isMajorThanYesterday7': isMajorThanYesterday7
-    })

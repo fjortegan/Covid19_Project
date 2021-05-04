@@ -1,14 +1,38 @@
 @import "bourbon/bourbon";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Source+Sans+Pro&display=swap");
 
+//VARIABLES
+$bg-color: #fff; //body bg color
+$_bgshadow-color: rgb(247, 244, 244);
+$basic-links-color: #222; //links color
+$link-hover-color: #fff; //link hover color
+$_cyan: #0f8b8d;
+$_ferrari-red: #f42b03;
+$_green: #62ab37;
+$_copper: #c46d5e;
+$_rosewood: #6b0504;
+$_cerise: #f00699;
+$_asidecolor: #e5eadd;
+
+
+//MIXINS
+@mixin position-absolute($top: null, $left: null, $right: null, $bottom: null) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+}
+
 body {
   margin: 0;
   padding: 0;
-  color: white;
+  color: $bg-color;
   box-sizing: border-box;
   font-family: monospace;
   font-size: 15px;
 }
+
 .grid-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -22,22 +46,22 @@ body {
 
 .header {
   grid-area: header;
-  background-color: whitesmoke;
+  background-color: $_bgshadow-color;
 }
 
 .aside {
   grid-area: aside;
-  background-color: #e5eadd;
+  background-color: $_asidecolor;
   font-family: "Poppins", sans-serif;
 }
 
 .main {
   grid-area: main;
-  background-color: white;
+  background-color: $bg-color;
 }
 .footer {
   grid-area: footer;
-  background-color: whitesmoke;
+  background-color: $_bgshadow-color;
 }
 
 /* flexing header and footer*/
@@ -77,17 +101,13 @@ body {
   color: rgb(27, 18, 18);
 }
 
-.aside_list-item:hover {
-  background-color: #677b49;
-  cursor: pointer;
-}
-
 .main_overview {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   font-family: "Source Sans Pro", sans-serif;
 }
+
 .overview_card {
   flex-basis: 250px;
   flex-grow: 1;
@@ -101,6 +121,7 @@ body {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   color: #003400;
+  border-left: 5px solid rgb(155, 155, 179);
 }
 
 .fa-angle-double-down {
@@ -120,26 +141,13 @@ body {
 .header_name {
   margin-left: 5px;
   margin-top: 15%;
-  color: #08C697;
+  color: #08c697;
 }
 
 .overview_card {
   background-repeat: no-repeat;
   background-position: right;
   background-size: 80px;
-}
-a::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 0.65rem;
-  z-index: 1;
-  width: 50%;
-  background: #fff;
-  -webkit-transition: transform 0.2s ease-in-out;
-  -o-transition: transform 0.2s ease-in-out;
-  transition: transform 0.2s ease-in-out;
 }
 
 .header_menu {
@@ -260,6 +268,10 @@ a::before {
   color: #000000;
 }
 
+
+// ANIMATIONS
+
+//MEDIA-QUERIES
 @media only screen and (min-width: 750px) {
   .aside_close-icon {
     display: none;

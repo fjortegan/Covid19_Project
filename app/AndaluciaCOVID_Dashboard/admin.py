@@ -59,4 +59,4 @@ class AccumulatedProvincesAdmin(admin.ModelAdmin):
 
 @admin.register(AcumulatedRegion)
 class AccumulatedRegionsAdmin(admin.ModelAdmin):
-    list_display = ("date", "ccaa","confirmedPDIA","totalConfirmed","Hospitalized","ICU","deceased","aument","pcr7days","pcr14days")
+    list_display = ("date", "ccaa","confirmedPDIA","totalConfirmed","Hospitalized","ICU","deceased","recovered","aument","pcr7days","pcr14days")

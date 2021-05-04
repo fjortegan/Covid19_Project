@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+        <div class="main_cards">
+          <div class="card">Aumento de los diagnosticados a 14 días
+              <canvas class="responsive-canvas" id="pie-chart" width="350" height="250"></canvas>
+          </div>
+          <div class="card">Aumento de ingresados
+            <canvas class="responsive-canvas" id="pie-chart3"  width="350" height="150"></canvas>
+          </div>
+          <div class="card">Evolución de fallecidos y curados
+           <canvas class="responsive-canvas" id="pie-chart2" width="350" height="250"></canvas>
+           </div>
+          
+  <script>
+    var ctx = document.getElementById('pie-chart').getContext('2d'); 
+    var data_1 = {
+        datasets: [{
+        fill: true,
+        backgroundColor: "#62E199",
+        label: 'Contagios en un día',
+        data: {{ dataAument|safe }}
+        }],
+        labels: {{ labels|safe }}
+        };  
+    var chart1 = new Chart(ctx, {
+        type: 'line',
+        data: data_1,
+        options: {
+                scales: {
+      y: { 
+        min: 0
+      }
+    },
+                    responsive: true
+                }
+            });
+  </script>
+{% endblock %}
