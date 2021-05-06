@@ -27,11 +27,12 @@ def dash_general_view(request):
             regComp = queryset2[count]
             etiquetas2.append(
                 str(queryset2[count].date.day) + '/' + str(queryset2[count].date.month))
+            etiquetas1.append(
+                str(queryset2[count].date.day) + '/' + str(queryset2[count].date.month))
         dataICU.append(regComp.ICU - register.ICU)
         dataHospitalizedCounter.append(
             regComp.Hospitalized - register.Hospitalized - dataICU[count-1])
 
-        etiquetas1.append(str(register.date))
         dataAument.append(register.aument)
         deceasedList.append(regComp.deceased - register.deceased)
         recoveredList.append(regComp.recovered - register.recovered)
@@ -63,14 +64,36 @@ def dash_general_view(request):
         'recoveredList': recoveredList
     })
 
+def dash_search_view(request, template_name='dash_search_view.html'):
+    listings = []
+    context_dict = {}
 
-def search(request):
-    results = []
-    query = request.GET.get('q')
-    results.add(Province.objects.filter(name.contains(q)))
-    results.add(Township.objects.filter(name.contains(q)))
-    return render(request, 'account/index.html', {'results': results})
+    if request.GET.get('search'):
+        nameFilter = request.GET.get('search')
 
+        if (request.POST.get('id1', True) & (request.POST.get('id2',False))):
+            listings = Township.objects.filter(name__contains=nameFilter)
+        elif (request.POST.get('id1', False) & (request.POST.get('id2',True))):
+            listings = Province.objects.filter(name__contains=nameFilter)
+        else:
+             listings = Province.objects.filter(name__contains=nameFilter)
+             if (listings.count()==0):
+                listings = Township.objects.filter(name__contains=nameFilter)
+
+    if (listings.count()==0):
+        template_name = "dash_not_found.html"
+    else:
+        if (isinstance(listings[0],Province)):
+            territoryToView = listings[0]
+            tasa14days =  listings[0].tasa14days
+            template_name = "dash_province_detail_view.html"
+        else:
+            territoryToView = listings[0]
+            tasa14days =  listings[0].tasa14days   
+            template_name = "dash_township_detail_view.html"    
+        context_dict = {'tasa14days': tasa14days}
+
+    return render(request, template_name, context_dict)
 
 def dash_province_view(request):
     provinces = Province.objects.order_by('name')
@@ -79,33 +102,71 @@ def dash_province_view(request):
     ICU = []
     deceased = []
     recovered = []
+    pcr14days = []
+    tasa14dias = []
+    recovereList = []
 
     for province in provinces:
         registerAcum = AcumulatedProvinces.objects.filter(province=province).order_by('-date')
+        hospitalizedProv = []
+
         if (registerAcum.count()>0):
             etiquetas.append(province.name)
             deceasedToAdd = registerAcum[0].deceased - registerAcum[1].deceased
             recoveredToAdd = registerAcum[0].recovered - registerAcum[1].recovered
+            pcr14days.append(registerAcum[0].pcr14days)
             ICU.append(registerAcum[0].ICU  - registerAcum[1].ICU)
             deceased.append(deceasedToAdd)
             recovered.append(recoveredToAdd)
             provincesIncidence.append(registerAcum[0].aument)
-
-    print(ICU)
-    print(deceased)
-    print(recovered)
-
+            tasa14dias.append(province.tasa14days)    
+            recovereList.append(province.recovered)    
+       
     return render(request, 'dash_province_view.html', {
         'labels': etiquetas,
         'provincesIncidence': provincesIncidence,
         'UCI':ICU,
+        'pcr14days':pcr14days,
         'deceased': deceased,
         'recovered': recovered,
+        'tasa14dias':tasa14dias,
+        'recovereList':recovereList,
+        'provinces':provinces
     })
 
+def dash_province_detail_view(request,pk):
+    province = Province.objects.filter(pk=pk)[0]
+    districts = District.objects.filter(province=province)
+    etiquetas = []
+    provinceIncidence = []
+    ICU = []
+
+    print(districts)    
+
+    for distr in districts:
+        townships = Township.objects.filter(distrit=distr.pk)
+
+    return render(request, 'dash_province_detail_view.html', {
+        'labels': etiquetas,
+        'townships':townships,
+        'provinceIncidence': provinceIncidence,
+        'UCI':ICU
+    })
+
+def dash_township_detail_view(request,pk):
+    ts = Township.objects.filter(pk=pk)[0]
+    etiquetas = []
+    incidence = []
+    ICU = []
+
+    return render(request, 'dash_township_detail_view.html', {
+        'labels': etiquetas,
+        'provinceIncidence': provinceIncidence,
+        'UCI':ICU
+    })   
+
+
 # API VIEWS
-
-
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {

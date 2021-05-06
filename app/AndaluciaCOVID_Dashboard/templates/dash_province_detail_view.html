@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+<div class="overview_ts">
+{% for ts in townships %}
+<a href="{% url 'dash_township_detail_view' ts.pk %}" class="button button-pill">{{ ts.name }}</a>
+{% endfor %}
+</div>
+<div class="main_cards">
+  <div class="card">
+    Aumento de los diagnosticados a 14 días
+    <canvas
+      class="responsive-canvas"
+      id="pie-chart"
+      width="350"
+      height="250"
+    ></canvas>
+  </div>
+  <div class="card">
+    Aumento de ingresados
+    <canvas
+      class="responsive-canvas"
+      id="pie-chart3"
+      width="350"
+      height="150"
+    ></canvas>
+  </div>
+  <div class="card">
+    Evolución de fallecidos y curados
+    <canvas
+      class="responsive-canvas"
+      id="pie-chart2"
+      width="350"
+      height="250"
+    ></canvas>
+  </div>
+  <script></script>
+  {% endblock %}
+</div>

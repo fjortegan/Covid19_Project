@@ -22,7 +22,7 @@
     {% load compress %} {% compress css %}
     <link
       type="text/x-scss"
-      href="{% static 'dashboard/css/style.scss' %}"
+      href="{% static 'css/style.scss' %}"
       rel="stylesheet"
       media="screen"
     />
@@ -33,7 +33,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Building dashboard with gird and flex</title>
+    <title>Andalucía COVID</title>
   </head>
   <body>
     <div class="grid-container">
@@ -41,20 +41,26 @@
         <strong> &#9776;</strong>
       </div>
       <header class="header">
-        <div class="header_search">Buscar...</div>
-      </header>
+       <form class="form-inline waves-light" action="{% static 'dash_search_view' %} " method="get" style="width: 70%;" mdbRippleRadius>
+       <input class="form-control mr-sm-2" name="search" style="width: 100%;"type="text"placeholder="Buscar">
+       </form>
+        <div class="md-checkbox">
+    <input id="i1" type="checkbox" checked>
+    <label for="i1">Municipios</label>
+  </div>
+        <div class="md-checkbox">
+    <input id="i2" type="checkbox" checked>
+    <label for="i2">Provincias</label></header>
       <aside class="aside">
         <div class="aside_close-icon">
           <strong>&times;</strong>
         </div>
         <div class="header_menu">
-        <img class="header_menu_img" src="https://img.icons8.com/bubbles/2x/coronavirus.png" alt="logo" />
-          <h4 class="header_name">DASHBOARD</h1>
+        <img class="header_menu_img" src="{% static 'img/golotipo.png' %}" alt="logo" />
         </div>
         <ul class="aside_list">
           <li class="aside_list-item"><a href="{% url 'dash_general_view' %}"><i class="fas fa-chart-line" style="margin-right: 10px;"></i></i>General</a></li>
           <li class="aside_list-item"><a class="" href="{% url 'dash_province_view' %}"><i class="fas fa-chart-bar" style="margin-right: 10px;"></i>Provincias</a></li>
-          <li class="aside_list-item"><i class="fas fa-chart-area" style="margin-right: 10px;"></i>Municipios</li>
           <li class="aside_list-item"><i class="fas fa-chart-area" style="margin-right: 10px;"></i>Vacunación</li>
           <li class="aside_list-item"><i class="fas fa-question-circle" style="margin-right: 10px;"></i>Q&A</li>
         </ul>
@@ -86,8 +92,8 @@
       });
     </script>
         <footer class="footer">
-        <div class="footer_copyright">&copy;2020</div>
-        <div class="footer_byline">Made with &hearts;</div>
+        <div class="footer_copyright">&copy;2021</div>
+        <div class="footer_byline">Carmen Morales Bonet&hearts;</div>
       </footer>    
   </body>
 </html>

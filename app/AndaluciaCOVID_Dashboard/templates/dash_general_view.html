@@ -36,13 +36,12 @@
           <div class="card">Evolución de fallecidos y curados
            <canvas class="responsive-canvas" id="pie-chart2" width="350" height="250"></canvas>
            </div>
-          
   <script>
     var ctx = document.getElementById('pie-chart').getContext('2d'); 
     var data_1 = {
         datasets: [{
         fill: true,
-        borderColor: "#62E199",
+        borderColor: "#99dcd1",
         fill: false,
         label: 'Contagios en un día',
         data: {{ dataAument|safe }}
@@ -65,13 +64,13 @@
     var ctx_2 = document.getElementById('pie-chart2').getContext('2d'); 
     var data_2 = {
         datasets: [{
-        borderColor: "#FF6656",
+        borderColor: "#7dcabe",
         label: 'Fallecidos totales',
         fill: false,
         data: {{ deceasedList |safe }}
         },
         {
-        borderColor: "#00A5FF",
+        borderColor: "#5fb9ac",
         fill: false,
         label: 'Curados totales',
         data: {{ recoveredList |safe }}
@@ -89,12 +88,12 @@
     var ctx_3 = document.getElementById('pie-chart3').getContext('2d'); 
     var data_3 = {
         datasets: [{
-        backgroundColor: "#FF6D5C",
+        backgroundColor: "#3ea79a",
         label: 'UCI',
         data: {{ dataICU|safe }}
         },
         {
-        backgroundColor: "#F8E382",
+        backgroundColor: "#009688",
         label: 'Convencional',
         data: {{ dataHospitalizedCounter|safe }}
         }
