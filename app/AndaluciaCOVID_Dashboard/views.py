@@ -42,11 +42,10 @@ def dash_general_view(request):
     deceased = Region.objects.filter(pk=0)[0].deceased
     recovered = Region.objects.filter(pk=0)[0].recovered
 
-    regi1 = AcumulatedRegion.objects.order_by('date')[0]
-    regi2 = AcumulatedRegion.objects.order_by('date')[1]
+    regi1 = AcumulatedRegion.objects.order_by('date')[0].aument
+    regi2 = AcumulatedRegion.objects.order_by('date')[1].aument
 
-    isMajorThanYesterday14 = regi1.pcr14days > regi2.pcr14days
-    isMajorThanYesterday7 = regi1.pcr7days > regi2.pcr7days
+    percentageAument = round((regi1 - regi2)/regi2)
 
     return render(request, 'dash_general_view.html', {
         'labels': etiquetas1,
@@ -58,10 +57,9 @@ def dash_general_view(request):
         'tasaInc7': incid7days,
         'deceased': deceased,
         'recovered': recovered,
-        'isMajorThanYesterday14': isMajorThanYesterday14,
-        'isMajorThanYesterday7': isMajorThanYesterday7,
         'deceasedList': deceasedList,
-        'recoveredList': recoveredList
+        'recoveredList': recoveredList,
+        'percentageAument':percentageAument
     })
 
 def dash_search_view(request, template_name='dash_search_view.html'):
@@ -136,21 +134,69 @@ def dash_province_view(request):
 
 def dash_province_detail_view(request,pk):
     province = Province.objects.filter(pk=pk)[0]
+    tships = Township.objects.all()
     districts = District.objects.filter(province=province)
     etiquetas = []
     provinceIncidence = []
-    ICU = []
+    dataICU = []
+    queryset = AcumulatedProvinces.objects.filter(province=province).order_by('date')[:16]
+    queryset2 = HistoricProvince.objects.filter(province=province).order_by('date')[:16]
+    townshipsProv = []
+    townships500 = []
+    townships1000 = []
 
-    print(districts)    
+    size = queryset.count()
+    count = 0
+    dataHospitalizedCounter = []
+    dataAument = []
+    deceasedList = []
+    recoveredList = []
 
-    for distr in districts:
-        townships = Township.objects.filter(distrit=distr.pk)
+    for district in districts:
+        for tship in tships:
+            if (tship.distrit==district):
+                townshipsProv.append(tship)
+
+
+    for township in townshipsProv:
+        if township.tasa14days > 500:
+           townships500.append(township.name) 
+        else:
+           townships1000.append(township.name)    
+
+    for register in queryset:
+        etiquetas.append(str(register.date.day) + '/' + str(register.date.month))
+        dataAument.append(register.aument)
+        deceasedList.append(register.deceased)
+        recoveredList.append(register.recovered)
+ 
+    for register in queryset2:
+        dataICU.append(register.ICU)
+        dataHospitalizedCounter.append(register.Hospitalized)
+
+    incid14days = province.tasa14days
+    incid7days = province.tasa7days
+    deceased = province.deceased
+    recovered = province.recovered
+
+    regi1 = AcumulatedProvinces.objects.order_by('date')[0]
+    regi2 = AcumulatedProvinces.objects.order_by('date')[1]
+
+    isMajorThanYesterday14 = regi1.pcr14days > regi2.pcr14days
+    isMajorThanYesterday7 = regi1.pcr7days > regi2.pcr7days
 
     return render(request, 'dash_province_detail_view.html', {
         'labels': etiquetas,
-        'townships':townships,
-        'provinceIncidence': provinceIncidence,
-        'UCI':ICU
+        'districts':districts,
+        'dataAument': dataAument,
+        'dataHospitalizedCounter': dataHospitalizedCounter,
+        'dataICU': dataICU,
+        'tasaInc14': incid14days,
+        'tasaInc7': incid7days,
+        'deceased': deceased,
+        'recovered': recovered,
+        'townships500': townships500,
+        'townships1000':townships1000
     })
 
 def dash_township_detail_view(request,pk):

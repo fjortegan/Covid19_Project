@@ -41,7 +41,7 @@
         <strong> &#9776;</strong>
       </div>
       <header class="header">
-       <form class="form-inline waves-light" action="{% static 'dash_search_view' %} " method="get" style="width: 70%;" mdbRippleRadius>
+       <form class="form-inline waves-light" action="{% url 'dash_search_view' %} " method="get" style="width: 70%;" mdbRippleRadius>
        <input class="form-control mr-sm-2" name="search" style="width: 100%;"type="text"placeholder="Buscar">
        </form>
         <div class="md-checkbox">
@@ -91,9 +91,5 @@
         toggle(aside, 'active');
       });
     </script>
-        <footer class="footer">
-        <div class="footer_copyright">&copy;2021</div>
-        <div class="footer_byline">Carmen Morales Bonet&hearts;</div>
-      </footer>    
   </body>
 </html>

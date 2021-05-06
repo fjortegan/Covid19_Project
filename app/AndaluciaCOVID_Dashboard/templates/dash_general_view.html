@@ -3,10 +3,7 @@
  <div class="overview_card">
             <div class="overview_card-info">IA 14 días</div>
             <div class="overview_card-icon">{{tasaInc14}}</div>
-            <span class="card-day">{% if isMajorThanYesterday14 is True %} <i class="fas fa-angle-double-up"></i>
-</i>
- {% elif isMajorThanYesterday14 is False %} <i class="fas fa-angle-double-down"></i>
- {% endif %} </span>
+            <span class="card-day">+{{percentageAument}}</span>
           </div>
           <div class="overview_card">
             <div class="overview_card-info">IA 7 días</div>
