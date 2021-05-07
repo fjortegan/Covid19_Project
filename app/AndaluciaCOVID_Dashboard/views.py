@@ -3,6 +3,7 @@ import json
 from .serializers import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from datetime import timedelta, date, datetime
 
 # APP VIEWS
 
@@ -15,7 +16,10 @@ def dash_general_view(request):
     etiquetas2 = []
     deceasedList = []
     recoveredList = []
-    queryset2 = AcumulatedRegion.objects.order_by('date')[:16]
+    start = datetime.now() - timedelta(days=14)
+    start_dt = start.date()
+    end_dt = datetime.now().date()
+    queryset2 = AcumulatedRegion.objects.filter(date__range=(start_dt, end_dt))
     count = 0
     size = queryset2.count()
 
@@ -45,7 +49,7 @@ def dash_general_view(request):
     regi1 = AcumulatedRegion.objects.order_by('date')[0].aument
     regi2 = AcumulatedRegion.objects.order_by('date')[1].aument
 
-    percentageAument = round((regi1 - regi2)/regi2)
+    percentageAument = round((regi1 - regi2)/regi2,2)
 
     return render(request, 'dash_general_view.html', {
         'labels': etiquetas1,
@@ -103,9 +107,12 @@ def dash_province_view(request):
     pcr14days = []
     tasa14dias = []
     recovereList = []
+    start = datetime.now() - timedelta(days=14)
+    start_dt = start.date()
+    end_dt = datetime.now().date()
 
     for province in provinces:
-        registerAcum = AcumulatedProvinces.objects.filter(province=province).order_by('-date')
+        registerAcum = AcumulatedProvinces.objects.order_by('-date').filter(province=province,date__range=(start_dt, end_dt))
         hospitalizedProv = []
 
         if (registerAcum.count()>0):
@@ -133,14 +140,17 @@ def dash_province_view(request):
     })
 
 def dash_province_detail_view(request,pk):
+    start = datetime.now() - timedelta(days=14)
+    start_dt = start.date()
+    end_dt = datetime.now().date()
     province = Province.objects.filter(pk=pk)[0]
     tships = Township.objects.all()
     districts = District.objects.filter(province=province)
     etiquetas = []
     provinceIncidence = []
     dataICU = []
-    queryset = AcumulatedProvinces.objects.filter(province=province).order_by('date')[:16]
-    queryset2 = HistoricProvince.objects.filter(province=province).order_by('date')[:16]
+    queryset = AcumulatedProvinces.objects.filter(province=province,date__range=(start_dt, end_dt))
+    queryset2 = HistoricProvince.objects.filter(province=province,date__range=(start_dt, end_dt))
     townshipsProv = []
     townships500 = []
     townships1000 = []
@@ -161,7 +171,7 @@ def dash_province_detail_view(request,pk):
     for township in townshipsProv:
         if township.tasa14days > 500:
            townships500.append(township.name) 
-        else:
+        if township.tasa14days > 1000:
            townships1000.append(township.name)    
 
     for register in queryset:

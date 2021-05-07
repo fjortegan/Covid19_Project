@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.urls import re_path
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('AndaluciaCOVID_Dashboard.urlsapi')),
-    path('app/', include('AndaluciaCOVID_Dashboard.urls'))
+    path('app/', include('AndaluciaCOVID_Dashboard.urls')),
+    path('', RedirectView.as_view(url='/app/general', permanent=True))
+
 ]
