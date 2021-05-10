@@ -298,6 +298,11 @@ body {
     color: #000000;
 }
 
+.show_info {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+}
+
 // FORMS
 .md-checkbox {
     font-family: 'Montserrat', sans-serif;
@@ -310,6 +315,7 @@ $checkbox-background-checked: yellow;
 // TABLES
 .table {
     height: 60vh;
+    font-size: 12px;
 }
 
 .container {
@@ -345,6 +351,18 @@ table {
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
     border-radius: 50px;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
 }
 
 .button {

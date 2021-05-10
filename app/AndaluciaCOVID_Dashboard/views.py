@@ -46,8 +46,8 @@ def dash_general_view(request):
     deceased = Region.objects.filter(pk=0)[0].deceased
     recovered = Region.objects.filter(pk=0)[0].recovered
 
-    regi1 = AcumulatedRegion.objects.order_by('date')[0].aument
-    regi2 = AcumulatedRegion.objects.order_by('date')[1].aument
+    regi1 = AcumulatedRegion.objects.order_by('-date')[0].aument
+    regi2 = AcumulatedRegion.objects.order_by('-date')[1].aument
 
     percentageAument = round((regi1 - regi2)/regi2,2)
 
@@ -105,6 +105,7 @@ def dash_province_view(request):
     deceased = []
     recovered = []
     pcr14days = []
+    pcr7days = []
     tasa14dias = []
     recovereList = []
     start = datetime.now() - timedelta(days=14)
@@ -120,6 +121,7 @@ def dash_province_view(request):
             deceasedToAdd = registerAcum[0].deceased - registerAcum[1].deceased
             recoveredToAdd = registerAcum[0].recovered - registerAcum[1].recovered
             pcr14days.append(registerAcum[0].pcr14days)
+            pcr7days.append(registerAcum[0].pcr7days)
             ICU.append(registerAcum[0].ICU  - registerAcum[1].ICU)
             deceased.append(deceasedToAdd)
             recovered.append(recoveredToAdd)
@@ -136,10 +138,12 @@ def dash_province_view(request):
         'recovered': recovered,
         'tasa14dias':tasa14dias,
         'recovereList':recovereList,
-        'provinces':provinces
+        'provinces':provinces,
+        'pcr7days':pcr7days
     })
 
 def dash_province_detail_view(request,pk):
+    
     start = datetime.now() - timedelta(days=14)
     start_dt = start.date()
     end_dt = datetime.now().date()
@@ -167,7 +171,6 @@ def dash_province_detail_view(request,pk):
             if (tship.distrit==district):
                 townshipsProv.append(tship)
 
-
     for township in townshipsProv:
         if township.tasa14days > 500:
            townships500.append(township.name) 
@@ -192,8 +195,10 @@ def dash_province_detail_view(request,pk):
     regi1 = AcumulatedProvinces.objects.order_by('date')[0]
     regi2 = AcumulatedProvinces.objects.order_by('date')[1]
 
-    isMajorThanYesterday14 = regi1.pcr14days > regi2.pcr14days
-    isMajorThanYesterday7 = regi1.pcr7days > regi2.pcr7days
+
+    print(request.GET.get('sel1'))
+    print(request.GET.get('sel2'))
+
 
     return render(request, 'dash_province_detail_view.html', {
         'labels': etiquetas,
@@ -205,8 +210,11 @@ def dash_province_detail_view(request,pk):
         'tasaInc7': incid7days,
         'deceased': deceased,
         'recovered': recovered,
+        'tships': tships,
         'townships500': townships500,
-        'townships1000':townships1000
+        'townships1000':townships1000,
+        'townships500list': ",".join(townships500),
+        'townships1000list': ",".join(townships1000)
     })
 
 def dash_township_detail_view(request,pk):

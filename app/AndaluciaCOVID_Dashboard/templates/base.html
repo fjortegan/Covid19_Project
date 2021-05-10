@@ -16,8 +16,9 @@
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
     {% load compress %} {% compress css %}
     <link
@@ -27,6 +28,19 @@
       media="screen"
     />
     {% endcompress %}
+    <script>
+$(document).ready(function(){
+  $(".show_info").hide();
+  $(".arrow").click(function(){
+      if ($(".show_info").is(":hidden")) {
+    $(".show_info").show(1000);
+      } else {
+    $(".show_info").hide(1000);
+
+      }
+  });
+});
+</script>
   </head>
 <!DOCTYPE html>
 <html lang="en">
