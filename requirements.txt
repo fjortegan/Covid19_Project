@@ -9,3 +9,4 @@ django-bourbon
 whitenoise
 djangorestframework
 dj-database-url
+django-heroku
