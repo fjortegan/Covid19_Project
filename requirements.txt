@@ -8,3 +8,4 @@ django-libsass
 django-bourbon
 whitenoise
 djangorestframework
+dj-database-url
