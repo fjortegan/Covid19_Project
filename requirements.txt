@@ -8,3 +8,4 @@ django-libsass
 django-bourbon
 djangorestframework
 whitenoise
+django-heroku
