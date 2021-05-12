@@ -6,3 +6,4 @@ pandas
 django-compressor
 django-libsass
 django-bourbon
+whitenoise
