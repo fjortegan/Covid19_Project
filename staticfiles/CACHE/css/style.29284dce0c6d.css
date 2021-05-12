@@ -1,0 +1,503 @@
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap");
+/*NAVBAR*/
+/* Bottombar icons */
+/* Tablet (768px) */
+/* Phone (Large)*/
+/* Phone (Small) */
+/*HEADER*/
+/* Tablet (768px) */
+/* Phone (Large)*/
+/* Phone (Small) */
+/*CHARTS*/
+/* Laptop (1024px) */
+/* Tablet (768px) */
+/* Phone (Small) */
+/* line 16, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+:root {
+  --primary-color: #5B25F5;
+  --secondary-color: #9792c7;
+  --secondary-color-with-opacity: #bab4e21f;
+  --background-color: #F5F5FD;
+  --background-color-hover: #e5e5ec;
+  --text: #9792c7;
+  --white: #fff;
+  --black: #000; }
+
+/* line 26, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--white);
+  color: var(--primary-color);
+  display: flex;
+  flex-direction: row;
+  flex: 1; }
+
+/* line 35, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar {
+  background-color: #fff;
+  height: 100%;
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  padding: 1.563em;
+  font-weight: 600;
+  width: 18.75em;
+  box-sizing: border-box;
+  justify-content: space-between; }
+
+/* line 47, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-brand {
+  padding: 2.188em 0em 2em 1em;
+  text-decoration: none;
+  color: var(--secondary-color); }
+  /* line 51, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .navbar-brand .icon-container {
+    width: 2em;
+    height: 2em;
+    border-radius: 0.8em;
+    margin-bottom: .5em;
+    padding: 0.5em;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+  /* line 62, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .navbar-brand .icon {
+    width: 2em;
+    height: 2em;
+    background-color: #fff; }
+  /* line 67, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .navbar-brand .icon.hexagon {
+    -webkit-mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/hexagon.svg) no-repeat center;
+    mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/hexagon.svg) no-repeat center; }
+  /* line 71, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .navbar-brand .name {
+    padding-top: 0.5em; }
+
+/* line 75, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+ul.navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+/* line 81, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-nav a {
+  display: flex;
+  color: var(--secondary-color);
+  padding: 1em;
+  text-decoration: none;
+  align-items: center;
+  cursor: pointer; }
+  /* line 89, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .navbar-nav a:not(.active):hover {
+    background-color: var(--background-color-hover); }
+
+/* line 94, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-nav a.active {
+  color: var(--primary-color); }
+
+/* line 98, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-nav .active .icon {
+  background-color: var(--primary-color);
+  width: 2em;
+  height: 2em; }
+
+/* line 104, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-nav img {
+  margin-right: .5em; }
+
+/* line 107, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-nav .icon.home {
+  -webkit-mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/home.svg) no-repeat center;
+  mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/home.svg) no-repeat center; }
+
+/* line 111, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-nav .icon.statistics {
+  -webkit-mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/bar-chart-2.svg) no-repeat center;
+  mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/bar-chart-2.svg) no-repeat center; }
+
+/* line 115, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-nav .icon.mail {
+  -webkit-mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/mail.svg) no-repeat center;
+  mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/mail.svg) no-repeat center; }
+
+/* line 119, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-nav .icon.user {
+  -webkit-mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/user.svg) no-repeat center;
+  mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/user.svg) no-repeat center; }
+
+/* line 123, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-nav .icon.file {
+  -webkit-mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/file.svg) no-repeat center;
+  mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/file.svg) no-repeat center; }
+
+/* line 128, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.icon {
+  background-color: var(--secondary-color);
+  width: 2em;
+  height: 2em; }
+
+/* line 134, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-footer .image-documents {
+  width: 100%;
+  margin-bottom: -8em;
+  position: relative;
+  z-index: 1; }
+
+/* line 140, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-footer .container {
+  background-color: var(--background-color);
+  margin: .5em;
+  padding: 1.688em;
+  padding-top: 6em;
+  display: flex;
+  flex-direction: column;
+  font-weight: normal;
+  border-radius: 1.3em;
+  position: relative;
+  bottom: 0;
+  box-sizing: border-box; }
+
+/* line 153, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-footer h2 {
+  margin-bottom: 0.25em;
+  color: var(--black); }
+
+/* line 157, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-footer span {
+  color: var(--text);
+  font-size: .8em; }
+
+/* line 161, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.navbar-footer a {
+  color: var(--white);
+  background-color: var(--primary-color);
+  text-decoration: none;
+  text-align: center;
+  padding: 1em;
+  border-radius: 1.3em;
+  margin-top: 1em; }
+
+/* line 171, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+main {
+  margin-top: 1em;
+  margin-right: 1em;
+  border-radius: 2.5em;
+  margin-left: 18.75em;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color);
+  padding: 2.3em; }
+  /* line 180, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    /* line 184, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header .icon.search {
+      -webkit-mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/search.svg) no-repeat center;
+      mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/search.svg) no-repeat center;
+      -webkit-mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/search.svg) no-repeat center;
+      mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/search.svg) no-repeat center; }
+    /* line 190, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header .form-inline {
+      display: flex;
+      width: 100%; }
+    /* line 194, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header input[type="search"] {
+      border: none;
+      background: none;
+      margin-left: 0.5em;
+      outline: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      width: 100%;
+      -webkit-appearance: none; }
+    /* line 204, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header button {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: 2px solid;
+      border-color: var(--secondary-color-with-opacity);
+      outline: none;
+      border-radius: 0.8em;
+      padding: .8em 1.2em;
+      color: var(--text);
+      font-weight: 600; }
+    /* line 216, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header button.change-view {
+      margin-right: 1.2em; }
+    /* line 219, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header button.notification {
+      border: none; }
+    /* line 222, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header button.menu {
+      border: none; }
+    /* line 226, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header .change-view .icon {
+      margin-right: 0.5em; }
+    /* line 230, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header section[role="application"] {
+      display: flex; }
+    /* line 233, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header .icon.layout {
+      -webkit-mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/layout.svg) no-repeat center;
+      mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/layout.svg) no-repeat center; }
+    /* line 237, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header .icon.notification {
+      -webkit-mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/bell.svg) no-repeat center;
+      mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/bell.svg) no-repeat center; }
+    /* line 241, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header .icon.menu {
+      -webkit-mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/menu.svg) no-repeat center;
+      mask: url(https://ozcanzaferayan.github.io/financial-crm/icon/menu.svg) no-repeat center; }
+  /* line 246, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main h1 {
+    font-size: 3em;
+    color: var(--black);
+    margin-top: 0; }
+  /* line 251, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section[role="credit-card"] {
+    width: 310px;
+    height: 210px;
+    background-color: var(--primary-color);
+    border-radius: 2em;
+    position: relative;
+    margin-left: -4em;
+    margin-bottom: 1em;
+    padding: 2em;
+    box-sizing: border-box;
+    -webkit-box-shadow: 10px 10px 46px -6px #685796;
+    -moz-box-shadow: 10px 10px 46px -6px #685796;
+    box-shadow: 10px 10px 46px -6px #685796; }
+    /* line 264, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main section[role="credit-card"] img {
+      width: 4em;
+      height: 100%; }
+    /* line 268, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main section[role="credit-card"] img.apple_pay {
+      width: 3em; }
+    /* line 271, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main section[role="credit-card"] .top {
+      display: flex;
+      justify-content: space-between; }
+    /* line 275, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main section[role="credit-card"] .ccNumber {
+      margin-top: 1.3em;
+      display: flex;
+      justify-content: space-between;
+      color: var(--white);
+      font-family: monospace;
+      font-size: 1.2rem; }
+  /* line 284, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section[role="chart"] {
+    width: 100%;
+    margin-left: 1em;
+    height: 18em;
+    background-color: var(--white);
+    border-radius: 2em;
+    margin-bottom: 1em;
+    padding: 2em;
+    padding-bottom: 5em;
+    box-sizing: border-box; }
+  /* line 295, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section.exchange-rates[role="chart"] {
+    width: calc(100% - 270px); }
+  /* line 298, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section.last-costs[role="chart"] {
+    width: calc(100% - 350px); }
+  /* line 301, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section.efficiency[role="chart"] {
+    width: 310px; }
+
+/* line 305, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.charts-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; }
+
+/* line 310, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.ccBottom {
+  margin-top: 1.2em;
+  display: flex;
+  justify-content: space-between;
+  color: var(--white); }
+  /* line 315, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .ccBottom label {
+    opacity: .5;
+    font-size: .7em; }
+
+/* line 320, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.ccValidThru {
+  display: flex;
+  flex-direction: column; }
+
+/* line 324, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.ccCardHolder {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1em; }
+
+/* line 330, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+section[role="chart"] .title {
+  color: var(--black);
+  font-weight: 700;
+  margin-top: 0; }
+
+@media screen and (max-width: 768px) {
+  /* line 337, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .navbar {
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    padding: 0.1em;
+    position: fixed;
+    margin: 0;
+    border-top: 1px solid var(--background-color); }
+  /* line 346, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .navbar-brand {
+    display: none; }
+  /* line 349, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .navbar-nav {
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: space-around; }
+    /* line 354, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    .navbar-nav a {
+      float: left;
+      font-size: 0.8em;
+      padding: 1em 0.5em; }
+    /* line 359, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    .navbar-nav .icon {
+      width: 2em;
+      height: 2em; }
+    /* line 363, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    .navbar-nav img {
+      margin-right: .5em; }
+  /* line 367, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .navbar-footer {
+    display: none; }
+  /* line 370, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main {
+    margin-left: 0;
+    border-radius: 0;
+    margin: 0;
+    padding: 0em; }
+    /* line 375, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header {
+      margin-bottom: 0em;
+      padding: 1em; }
+      /* line 378, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+      main header button.change-view {
+        display: none; }
+    /* line 382, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main h1 {
+      display: none; }
+    /* line 385, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main section[role="credit-card"] {
+      margin-left: 0; }
+    /* line 388, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main section.exchange-rates[role="chart"] {
+      margin-left: 0;
+      width: 100%;
+      padding: 2em;
+      border-radius: 0;
+      padding-bottom: 5em; }
+    /* line 395, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main section.last-costs[role="chart"] {
+      margin-left: 0;
+      width: 100%;
+      padding: 2em;
+      border-radius: 0;
+      padding-bottom: 5em; }
+    /* line 402, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main section.efficiency[role="chart"] {
+      margin-left: 0;
+      width: 100%;
+      padding: 2em;
+      border-radius: 0;
+      padding-bottom: 5em; }
+  /* line 410, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .charts-wrapper {
+    flex-direction: column; } }
+
+@media screen and (max-width: 500px) {
+  /* line 415, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .navbar-nav {
+    position: relative;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around; }
+    /* line 420, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    .navbar-nav a {
+      flex-direction: column;
+      align-items: center; }
+  /* line 426, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section.exchange-rates[role="chart"] {
+    padding: 0.5em;
+    padding-bottom: 3em; }
+  /* line 430, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section.last-costs[role="chart"] {
+    padding: 0.5em;
+    padding-bottom: 3em; }
+  /* line 434, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section.efficiency[role="chart"] {
+    padding: 0.5em;
+    padding-bottom: 3em;
+    margin-bottom: 5em; } }
+
+@media screen and (max-width: 320px) {
+  /* line 443, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .navbar-nav span {
+    display: none; }
+  /* line 448, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main header {
+    padding: 0.5em 0.7em; }
+    /* line 449, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main header button {
+      padding: 0em 1.2em; }
+  /* line 454, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section[role="credit-card"] {
+    width: 100%;
+    padding: 0.75em;
+    margin-bottom: 0.75em;
+    border-radius: 0;
+    height: initial;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none; }
+    /* line 463, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main section[role="credit-card"] img {
+      width: 2em; }
+    /* line 466, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main section[role="credit-card"] img.apple_pay {
+      width: 2em; }
+    /* line 469, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+    main section[role="credit-card"] .ccNumber {
+      margin-top: 0.7em; }
+  /* line 473, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section.exchange-rates[role="chart"] {
+    height: 12em; }
+  /* line 476, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section.last-costs[role="chart"] {
+    height: 12em; }
+  /* line 479, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section.efficiency[role="chart"] {
+    height: 12em; }
+  /* line 483, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .ccBottom {
+    margin-top: 0.7em; }
+  /* line 487, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  section[role="chart"] .title {
+    margin-bottom: 0.2em; } }
+
+@media screen and (max-width: 1024px) {
+  /* line 494, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section.efficiency[role="chart"] {
+    width: 170px; }
+  /* line 497, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  main section.last-costs[role="chart"] {
+    width: calc(100% - 210px); } }

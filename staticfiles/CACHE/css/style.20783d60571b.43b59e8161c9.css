@@ -1,0 +1,348 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Source+Sans+Pro&display=swap");
+/* line 27, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+body {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  box-sizing: border-box;
+  font-family: monospace;
+  font-size: 15px; }
+
+/* line 36, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr 50px;
+  grid-template-areas: "header" "main" "footer";
+  height: 100vh; }
+
+/* line 47, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.header {
+  grid-area: header;
+  background-color: #f7f4f4; }
+
+/* line 52, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.aside {
+  grid-area: aside;
+  background-color: #e5eadd;
+  font-family: "Poppins", sans-serif; }
+
+/* line 58, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.main {
+  grid-area: main;
+  background-color: #fff; }
+
+/* line 62, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.footer {
+  grid-area: footer;
+  background-color: #f7f4f4; }
+
+/* flexing header and footer*/
+/* line 68, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.header,
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #3a4a40;
+  padding: 0 15px; }
+
+/* flexing aside */
+/* line 78, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.aside {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 240px;
+  position: fixed;
+  overflow-y: auto;
+  z-index: 2;
+  transform: translateX(-245px); }
+
+/* line 89, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.aside.active {
+  transform: translateX(0); }
+
+/* line 93, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.aside_list {
+  padding: 0;
+  margin-top: 85px;
+  list-style-type: none; }
+
+/* line 99, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.aside_list-item {
+  padding: 20px 20px 20px 40px;
+  color: #1b1212; }
+
+/* line 104, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.main_overview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: "Source Sans Pro", sans-serif; }
+
+/* line 111, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.overview_card {
+  flex-basis: 250px;
+  flex-grow: 1;
+  margin: 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  /* background-color: seagreen; */
+  height: 100px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  color: #003400;
+  border-left: 5px solid #9b9bb3; }
+
+/* line 127, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.fa-angle-double-down {
+  border-radius: 50%;
+  height: auto;
+  background-color: #5cdb94;
+  padding: 8px 10px;
+  transition: 0.4s; }
+
+/* line 135, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.header_menu_img {
+  border-radius: 20%;
+  width: 100px;
+  height: 100px; }
+
+/* line 141, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.header_name {
+  margin-left: 5px;
+  margin-top: 15%;
+  color: #08c697; }
+
+/* line 147, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.overview_card {
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px; }
+
+/* line 153, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.header_menu {
+  display: flex; }
+
+/* line 157, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.fa-angle-double-up {
+  border-radius: 50%;
+  height: auto;
+  background-color: #ff6d5c;
+  padding: 8px 10px;
+  transition: 0.4s; }
+
+/* line 165, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.overview_card-info {
+  font-family: "Poppins", sans-serif; }
+
+/* Layout for main-cards section // below main_overview */
+/* line 170, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.main_cards {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 500px 400px 400px;
+  grid-template-areas: "card1" "card2" "card3";
+  grid-gap: 10px; }
+
+/* line 181, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.card {
+  padding: 20px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  color: black; }
+
+/* line 188, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.card:first-child {
+  grid-area: card1;
+  font-family: "Poppins", sans-serif; }
+
+/* line 192, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.card:nth-child(2) {
+  grid-area: card2;
+  font-family: "Poppins", sans-serif; }
+
+/* line 196, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.card:nth-child(3) {
+  grid-area: card3;
+  font-family: "Poppins", sans-serif; }
+
+/* responsive layout */
+@media only screen and (min-width: 750px) {
+  /* line 203, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .grid-container {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 50px 1fr 50px;
+    grid-template-areas: "aside header" "aside main" "aside footer";
+    height: 100vh; }
+  /* line 214, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .aside {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transform: translateX(0); }
+  /* line 221, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .main_cards {
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 200px 300px;
+    grid-template-areas: "card1 card2" "card1 card3";
+    grid-gap: 10px; } }
+
+/* line 233, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.menu-icon {
+  position: fixed;
+  display: flex;
+  top: 2px;
+  left: 8px;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  cursor: pointer;
+  padding: 12px;
+  color: black; }
+
+/* line 246, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+#responsive-canvas {
+  width: 100%; }
+
+/* line 250, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.header_search {
+  margin-left: 24px; }
+
+/* line 254, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.aside_close-icon {
+  position: absolute;
+  visibility: visible;
+  top: 20px;
+  right: 20px;
+  cursor: pointer; }
+
+/* line 262, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.canvas {
+  width: 100%;
+  height: auto; }
+
+/* line 267, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+.aside_close-icon {
+  color: #000000; }
+
+/* line 273, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+table {
+  margin: 1em 0 0 0;
+  border-collapse: collapse;
+  border: 0.1em solid rgba(0, 0, 0, 0.1); }
+
+/* line 279, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+caption {
+  text-align: left;
+  font-style: italic;
+  padding: 0.25em 0.5em 0.5em 0.5em; }
+
+/* line 285, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th,
+td {
+  padding: 0.25em 0.5em 0.25em 1em;
+  vertical-align: text-top;
+  text-align: left;
+  text-indent: -0.5em; }
+
+/* line 293, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+td.sorted {
+  background-color: rgba(255, 255, 0, 0.15); }
+
+/* line 297, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th {
+  vertical-align: bottom;
+  background-color: rgba(0, 0, 0, 0.1); }
+
+/* line 302, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.05); }
+
+/* line 306, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.05); }
+
+/* line 310, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+td:nth-of-type(2) {
+  font-style: italic; }
+
+/* line 314, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th:nth-of-type(3),
+td:nth-of-type(3) {
+  text-align: right; }
+
+/* line 319, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th:nth-of-type(6),
+td:nth-of-type(6) {
+  text-align: center;
+  min-width: 4em; }
+
+/* line 325, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th {
+  padding: 0;
+  text-indent: 0; }
+
+/* line 330, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th > button {
+  background: transparent;
+  border: 1px solid transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 0.25em 0.5em 0.25em 1em;
+  white-space: nowrap;
+  width: 100%;
+  min-width: 4.5em;
+  display: grid;
+  grid-template-columns: minmax(2em, max-content) 0.65em auto;
+  grid-template-areas: "t a x" "t d x"; }
+
+/* line 346, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th > button > span {
+  grid-area: t;
+  padding-right: .5em; }
+
+/* line 351, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th > button > .asc {
+  grid-area: a;
+  align-self: center; }
+
+/* line 356, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th > button > .des {
+  grid-area: d;
+  align-self: center; }
+
+/* line 361, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th > button::after {
+  content: "";
+  grid-area: x; }
+
+/* line 366, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th > button:focus,
+th > button:hover {
+  color: #fff;
+  color: var(--col-header-hover-color);
+  background-color: #666;
+  outline: none; }
+
+/* line 374, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+th > button svg.sort {
+  fill: transparent;
+  stroke: var(--col-header-color);
+  max-width: .65em;
+  max-height: 1.2em; }
+
+@media only screen and (min-width: 750px) {
+  /* line 384, AndaluciaCOVID_Dashboard/static/dashboard/style.scss */
+  .aside_close-icon {
+    display: none;
+    color: #000000; } }
