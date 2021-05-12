@@ -6,5 +6,4 @@ pandas
 django-compressor
 django-libsass
 django-bourbon
-djangorestframework
 whitenoise
