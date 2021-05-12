@@ -1,17 +1,5 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
 <div class="overview_ts">
-  <select id="sel1" onchange="district = this.value;">
-    {% for district in districts %}
-    <option value="{{ district.pk }}" selected="selected">
-      {{ district.name }}
-    </option>
-    {% endfor %}
-  </select>
-  <select id="sel2">
-    {% for tship in townshipsProv %} {% if tship.district.pk == text %}
-    <option value="{{ tship.name }}">{{ tship.name }}</option>
-    {% endif %} {% endfor %}
-  </select>
 </div>
 <div class="main_cards">
   <div class="card">
@@ -20,13 +8,13 @@
       class="responsive-canvas"
       id="pie-chart"
       width="350"
-      height="250"
+      height="230"
     ></canvas>
   </div>
   <div class="card">
   <div class="prov_info-general">
-<span class="badge badge-pill badge-danger">IA 14 {{ tasaInc14 }}</span>
-<span class="badge badge-pill badge-danger">IA 7  {{ tasaInc7 }}</span>
+<span class="label label-pill label-danger">IA 14 {{ tasaInc14 }}</span>
+<span class="label label-pill label-warning">IA 7  {{ tasaInc7 }}</span>
     <p class="info_prov_detail">
       <i class="fas fa-square-full"></i><b>Municipios +500 IA: </b> {{townships500|length }} <i class="arrow down"></i>
       <p class="show_info">{{townships500list}}</p>

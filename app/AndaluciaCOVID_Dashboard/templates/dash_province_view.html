@@ -4,8 +4,7 @@
   <a
     href="{% url 'dash_province_detail_view' prov.pk %}"
     class="button button-pill"
-    >{{ prov.name }}</a
-  >
+    >{{ prov.name }}</a>
   {% endfor %}
 </div>
 <div class="main_cards" stye="margin-bottom:0px 0px 15px;">
@@ -78,7 +77,7 @@
           ],
           datasets: [{
             label: 'PCR 14 días',
-            backgroundColor: "#caf270",
+            backgroundColor: "#70EBD6",
             data: {{pcr14days|safe}},
           }, {
             label: 'PCR 7 días',

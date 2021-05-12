@@ -6,8 +6,6 @@ from rest_framework.response import Response
 from datetime import timedelta, date, datetime
 
 # APP VIEWS
-
-
 def dash_general_view(request):
     dataAument = []
     dataHospitalizedCounter = []
@@ -66,36 +64,12 @@ def dash_general_view(request):
         'percentageAument':percentageAument
     })
 
-def dash_search_view(request, template_name='dash_search_view.html'):
-    listings = []
-    context_dict = {}
-
-    if request.GET.get('search'):
-        nameFilter = request.GET.get('search')
-
-        if (request.POST.get('id1', True) & (request.POST.get('id2',False))):
-            listings = Township.objects.filter(name__contains=nameFilter)
-        elif (request.POST.get('id1', False) & (request.POST.get('id2',True))):
-            listings = Province.objects.filter(name__contains=nameFilter)
-        else:
-             listings = Province.objects.filter(name__contains=nameFilter)
-             if (listings.count()==0):
-                listings = Township.objects.filter(name__contains=nameFilter)
-
-    if (listings.count()==0):
-        template_name = "dash_not_found.html"
-    else:
-        if (isinstance(listings[0],Province)):
-            territoryToView = listings[0]
-            tasa14days =  listings[0].tasa14days
-            template_name = "dash_province_detail_view.html"
-        else:
-            territoryToView = listings[0]
-            tasa14days =  listings[0].tasa14days   
-            template_name = "dash_township_detail_view.html"    
-        context_dict = {'tasa14days': tasa14days}
-
-    return render(request, template_name, context_dict)
+def dash_search_view(request):
+    resultsFilter = []
+    
+    nameFilter = request.GET.get('something')
+    territoryToView = Township.objects.filter(name=nameFilter)
+    return dash_township_detail_view(request,territoryToView.first())
 
 def dash_province_view(request):
     provinces = Province.objects.order_by('name')
@@ -118,14 +92,14 @@ def dash_province_view(request):
 
         if (registerAcum.count()>0):
             etiquetas.append(province.name)
-            deceasedToAdd = registerAcum[0].deceased - registerAcum[1].deceased
-            recoveredToAdd = registerAcum[0].recovered - registerAcum[1].recovered
-            pcr14days.append(registerAcum[0].pcr14days)
-            pcr7days.append(registerAcum[0].pcr7days)
-            ICU.append(registerAcum[0].ICU  - registerAcum[1].ICU)
+            deceasedToAdd = registerAcum.first().deceased - registerAcum[1].deceased
+            recoveredToAdd = registerAcum.first().recovered - registerAcum[1].recovered
+            pcr14days.append(registerAcum.first().pcr14days)
+            pcr7days.append(registerAcum.first().pcr7days)
+            ICU.append(registerAcum.first().ICU  - registerAcum[1].ICU)
             deceased.append(deceasedToAdd)
             recovered.append(recoveredToAdd)
-            provincesIncidence.append(registerAcum[0].aument)
+            provincesIncidence.append(registerAcum.first().aument)
             tasa14dias.append(province.tasa14days)    
             recovereList.append(province.recovered)    
        
@@ -143,7 +117,6 @@ def dash_province_view(request):
     })
 
 def dash_province_detail_view(request,pk):
-    
     start = datetime.now() - timedelta(days=14)
     start_dt = start.date()
     end_dt = datetime.now().date()
@@ -158,7 +131,6 @@ def dash_province_detail_view(request,pk):
     townshipsProv = []
     townships500 = []
     townships1000 = []
-
     size = queryset.count()
     count = 0
     dataHospitalizedCounter = []
@@ -172,10 +144,10 @@ def dash_province_detail_view(request,pk):
                 townshipsProv.append(tship)
 
     for township in townshipsProv:
-        if township.tasa14days > 500:
+        if (township.tasa14days >= 500 and township.tasa14days < 1000 ):
            townships500.append(township.name) 
-        if township.tasa14days > 1000:
-           townships1000.append(township.name)    
+        if (township.tasa14days >= 1000 and township.name not in townships500):
+                townships1000.append(township.name)    
 
     for register in queryset:
         etiquetas.append(str(register.date.day) + '/' + str(register.date.month))
@@ -195,11 +167,6 @@ def dash_province_detail_view(request,pk):
     regi1 = AcumulatedProvinces.objects.order_by('date')[0]
     regi2 = AcumulatedProvinces.objects.order_by('date')[1]
 
-
-    print(request.GET.get('sel1'))
-    print(request.GET.get('sel2'))
-
-
     return render(request, 'dash_province_detail_view.html', {
         'labels': etiquetas,
         'districts':districts,
@@ -218,15 +185,54 @@ def dash_province_detail_view(request,pk):
     })
 
 def dash_township_detail_view(request,pk):
-    ts = Township.objects.filter(pk=pk)[0]
+    start = datetime.now() - timedelta(days=14)
+    start_dt = start.date()
+    end_dt = datetime.now().date()
+    tship = Township.objects.filter(pk=pk)[0]
     etiquetas = []
-    incidence = []
-    ICU = []
+    queryset = HistoricTownship.objects.order_by('-date').filter(township=tship,date__range=(start_dt, end_dt))
+    confirmed14days = []
+    confirmed14days100hab = []
+    deceases = []
+    rules = 0
+    count = 0
+    size = queryset.count()
+
+    for register in queryset:
+        if (count == 0):
+            regComp = queryset[0]
+        count += 1
+        if (count < size):
+            regComp = queryset[count]
+            etiquetas.append(
+                str(queryset[count].date.day) + '/' + str(queryset[count].date.month))
+        confirmed14days.append(register.Confirmados_PCR_TA_14d)
+        confirmed14days100hab.append(register.confirmed14100hab)
+        deceases.append(register.deceases)
+
+    tshipTot1 = queryset[0].totalConfirmed
+    tshipTot2 = queryset[1].totalConfirmed
+
+    tshipAument = tshipTot1 - tshipTot2
+    tshipIncidence = tship.tasa14days
+    confirmedPDIA = tship.confirmedPDIA
+
+    if (tshipIncidence>=500 and tshipIncidence<=10000):
+        rules = 0
+    elif (tshipIncidence>=1000):
+        rules = 1    
+    else:
+        rules = 2
 
     return render(request, 'dash_township_detail_view.html', {
         'labels': etiquetas,
-        'provinceIncidence': provinceIncidence,
-        'UCI':ICU
+        'confirmed14days':confirmed14days,
+        'tshipAument': tshipAument,
+        'tshipIncidence':tshipIncidence,
+        'confirmed14days100hab':confirmed14days100hab,
+        'rules': rules,
+        'confirmedPDIA':confirmedPDIA,
+        'deceases':deceases
     })   
 
 

@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import os 
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-DJANGO_SETTINGS_MODULE='COVID19_Andalucia.settings'
+DJANGO_SETTINGS_MODULE = 'COVID19_Andalucia.settings'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -29,7 +29,7 @@ DEBUG = True
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
-DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
+DATE_INPUT_FORMATS = ('%d-%m-%Y', '%Y-%m-%d')
 
 # Application definition
 
@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'AndaluciaCOVID_Dashboard.context_processors.getAllTerritories',
             ],
         },
     },
@@ -94,6 +95,7 @@ DATABASES = {
         'PORT': 5432,
     }
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -112,6 +114,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Context Processors
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # maybe other here
+    'app.context_processors.getAllTerritories',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

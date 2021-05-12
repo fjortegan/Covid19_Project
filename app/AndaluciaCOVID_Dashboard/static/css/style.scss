@@ -36,13 +36,24 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 50px 1fr 50px;
-    grid-template-areas: "header" "main" "footer";
+    grid-template-areas: "header""main""footer";
     height: 100vh;
 }
 
 .header {
     grid-area: header;
     background-color: $_bgshadow-color;
+    align-items: center;
+    display: -webkit-box;
+    display: flex;
+    padding: 0.5em 0.5em 0.5em 1em;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    width: 100%;
+}
+
+.header .button {
+    margin-right: 50%;
 }
 
 .aside {
@@ -202,7 +213,7 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 500px 400px 400px;
-    grid-template-areas: "card1" "card2" "card3";
+    grid-template-areas: "card1""card2""card3";
     grid-gap: 10px;
 }
 
@@ -241,7 +252,7 @@ body {
         display: grid;
         grid-template-columns: 200px 1fr;
         grid-template-rows: 50px 1fr 50px;
-        grid-template-areas: "aside header" "aside main" "aside footer";
+        grid-template-areas: "aside header""aside main""aside footer";
         height: 100vh;
     }
     .aside {
@@ -255,7 +266,7 @@ body {
         display: grid;
         grid-template-columns: 2fr 1fr;
         grid-template-rows: 200px 300px;
-        grid-template-areas: "card1 card2" "card1 card3";
+        grid-template-areas: "card1 card2""card1 card3";
         grid-gap: 10px;
     }
 }
@@ -303,15 +314,11 @@ body {
     font-size: 12px;
 }
 
-// FORMS
-.md-checkbox {
-    font-family: 'Montserrat', sans-serif;
+.label-pill {
+    margin-right: 10px;
 }
 
-$checkbox-background: #fff;
-$checkbox-border: #e900ff;
-$checkbox-checked: $checkbox-border;
-$checkbox-background-checked: yellow;
+// FORMS
 // TABLES
 .table {
     height: 60vh;
@@ -334,6 +341,7 @@ $checkbox-background-checked: yellow;
 
 .info_prov_detail {
     font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
 }
 
 .info_prov_detail b {
@@ -342,6 +350,20 @@ $checkbox-background-checked: yellow;
 
 table {
     font-family: 'Montserrat', sans-serif;
+}
+
+// SEARCH
+input {
+    height: 32px;
+    font-size: 14px;
+    width: 80%;
+    margin-left: 8px;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+}
+
+input:focus {
+    outline: none;
 }
 
 // BUTTONS
@@ -394,28 +416,6 @@ button:hover {
 }
 
 // ANIMATIONS
-@keyframes bounce {
-    0%,
-    100%,
-    20%,
-    50%,
-    80% {
-        -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-        transform: translateY(0);
-    }
-    40% {
-        -webkit-transform: translateY(-30px);
-        -ms-transform: translateY(-30px);
-        transform: translateY(-30px);
-    }
-    60% {
-        -webkit-transform: translateY(-15px);
-        -ms-transform: translateY(-15px);
-        transform: translateY(-15px);
-    }
-}
-
 //MEDIA-QUERIES
 @media only screen and (min-width: 750px) {
     .aside_close-icon {

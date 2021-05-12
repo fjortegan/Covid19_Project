@@ -1,52 +1,57 @@
 const tableContainer = document.getElementById("container");
 
 const chartData = {
-  type: "line",
-  data: {
-    labels: [
-      "Almería",
-      "Cádiz",
-      "Córdoba",
-      "Granada",
-      "Huelva",
-      "Jaén",
-      "Málaga",
-      "Sevilla",
-    ],
-    datasets: [
-      {
-        label: "PCR 14 días",
-        data: { pcr14days },
-        borderWidth: 1,
-      },
-      {
-        label: "UCI",
-        data: { UCI },
-        borderWidth: 1,
-      },
-      {
-        label: "Fallecidos",
-        data: { deceased },
-        borderWidth: 1,
-      },
-      {
-        label: "Curados",
-        data: { recovered },
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            reverse: false,
-          },
-        },
-      ],
+    type: "line",
+    data: {
+        labels: [
+            "Almería",
+            "Cádiz",
+            "Córdoba",
+            "Granada",
+            "Huelva",
+            "Jaén",
+            "Málaga",
+            "Sevilla",
+        ],
+        datasets: [{
+                label: "PCR 14 días",
+                data: {
+                    pcr14days
+                },
+                borderWidth: 1,
+            },
+            {
+                label: "UCI",
+                data: {
+                    UCI
+                },
+                borderWidth: 1,
+            },
+            {
+                label: "Fallecidos",
+                data: {
+                    deceased
+                },
+                borderWidth: 1,
+            },
+            {
+                label: "Curados",
+                data: {
+                    recovered
+                },
+                borderWidth: 1,
+            },
+        ],
     },
-  },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    reverse: false,
+                },
+            }, ],
+        },
+    },
 };
 
 const xAxis = chartData.data.labels;
